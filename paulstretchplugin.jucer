@@ -113,7 +113,8 @@
         <MODULEPATH id="juce_dsp" path="../gitrepos/JUCE/modules"/>
       </MODULEPATHS>
     </VS2017>
-    <LINUX_MAKE targetFolder="Builds/LinuxMakefile" extraDefs="JUCE_WEB_BROWSER=0&#10;">
+    <LINUX_MAKE targetFolder="Builds/LinuxMakefile" extraDefs="JUCE_WEB_BROWSER=0&#10;JUCE_MODAL_LOOPS_PERMITTED=1"
+                extraLinkerFlags="-lfftw3 -lfftw3f -lfftw">
       <CONFIGURATIONS>
         <CONFIGURATION name="Debug" isDebug="1" optimisation="1" linkTimeOptimisation="0"
                        targetName="PaulXStretch"/>
