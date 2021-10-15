@@ -1,6 +1,8 @@
-# PaulXStretch - Plugin for extreme time stretching and other spectral processing of audio
+# PaulXStretch
 
-**Fork from https://bitbucket.org/xenakios/paulstretchplugin/overview**
+**Plugin for extreme time stretching and other spectral processing of audio**
+
+Fork from https://bitbucket.org/xenakios/paulstretchplugin/overview
 
 Copyright (C) 2006-2011 Nasca Octavian Paul, Tg. Mures, Romania
 
@@ -8,7 +10,7 @@ Copyright (C) 2017-2018 Xenakios
 
 Released under GNU General Public License v.3 license.
 
-## History :
+## History
 *02-26-2019 1.2.4*
 - Changed Import file button to show/hide an overlaid file browser for audio files. (This seems to be the only 
 	 technically correct way to browse for the files.)
@@ -23,9 +25,9 @@ Released under GNU General Public License v.3 license.
 - Attempt to prevent capture enabled state from being recalled when undoing in the host
 
 *07-09-2018 1.2.2*
-	-Add option to mute audio when capturing audio
-	-Automatically adjust play range after capturing to captured length
-	-Moved Free Filter parameters from the main parameters GUI to the Free Filter tab page
+- Add option to mute audio when capturing audio
+- Automatically adjust play range after capturing to captured length
+- Moved Free Filter parameters from the main parameters GUI to the Free Filter tab page
 
 *06-01-2018 1.2.1*
 - Added looping enabled parameter
@@ -39,7 +41,8 @@ Released under GNU General Public License v.3 license.
 	 in a separate tabbed page in the GUI.
 - Spectral module enabled parameters changed to target particular modules instead of chain slots
 - Save and restore some additional settings
-*04-01-2018 1.1.2 *
+
+*04-01-2018 1.1.2*
 - Rebuilt with latest JUCE to fix parameter automation issue for example in Ableton Live
 - Optimization in calculation of transformed free filter envelope
 
@@ -124,7 +127,7 @@ Released under GNU General Public License v.3 license.
 - Very early public release. Various issues present.
 
 
-## Requirements for building from source code:
+## Requirements for building from source code
     
 - A modern C++ compiler and standard library (C++14, some C++17 needs to be supported)
 - JUCE 5.3.2 : https://github.com/WeAreROLI/JUCE
