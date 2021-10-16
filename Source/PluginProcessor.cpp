@@ -71,7 +71,8 @@ PaulstretchpluginAudioProcessor::PaulstretchpluginAudioProcessor(bool is_stand_a
 		}
 		m_propsfile->m_props_file->setValue("importfilefolder", resu.getParentDirectory().getFullPathName());
 		String loaderr = setAudioFile(resu);
-		if (auto ed = dynamic_cast<PaulstretchpluginAudioProcessorEditor*>(getActiveEditor()); ed != nullptr)
+		auto ed = dynamic_cast<PaulstretchpluginAudioProcessorEditor*>(getActiveEditor());
+		if (ed != nullptr)
 		{
 			ed->m_last_err = loaderr;
 		}
@@ -526,6 +527,7 @@ void PaulstretchpluginAudioProcessor::saveCaptureBuffer()
 				inchans, 32, {}, 0));
 			if (writer != nullptr)
 			{
+				outstream.release();
 				auto sourcebuffer = getStretchSource()->getSourceAudioBuffer();
 				jassert(sourcebuffer->getNumChannels() == inchans);
 				jassert(sourcebuffer->getNumSamples() > 0);
@@ -536,7 +538,6 @@ void PaulstretchpluginAudioProcessor::saveCaptureBuffer()
 			else
 			{
 				Logger::writeToLog("Could not create wav writer");
-				//delete outstream;
 			}
 		}
 		else
@@ -590,34 +591,36 @@ String PaulstretchpluginAudioProcessor::offlineRender(OfflineRenderParams render
 			oformattouse = 32;
 			clipoutput = true;
 		}
-		auto writer{ unique_from_raw(wavformat.createWriterFor(outstream.get(), outsr, numoutchans,
-			oformattouse, StringPairArray(), 0)) };
-		if (writer == nullptr)
+		auto writer = unique_from_raw(wavformat.createWriterFor(outstream.get(), outsr, numoutchans,
+			oformattouse, StringPairArray(), 0));
+		if (writer != nullptr)
 		{
-			//delete outstream;
+			outstream.release();
+			AudioBuffer<float> renderbuffer{ numoutchans, blocksize };
+			MidiBuffer dummymidi;
+			double outlensecs = sc->getOutputDurationSecondsForRange(sc->getPlayRange(),sc->getFFTSize());
+			int64_t outlenframes = outlensecs * outsr;
+			int64_t outcounter{ 0 };
+			m_offline_render_state = 0;
+			m_offline_render_cancel_requested = false;
+
+			while (outcounter < outlenframes)
+			{
+				if (m_offline_render_cancel_requested == true)
+					break;
+				processor->processBlock(renderbuffer, dummymidi);
+				int64 framesToWrite = std::min<int64>(blocksize, outlenframes - outcounter);
+				writer->writeFromAudioSampleBuffer(renderbuffer, 0, framesToWrite);
+				outcounter += blocksize;
+				m_offline_render_state = 100.0 / outlenframes * outcounter;
+			}
+			m_offline_render_state = 200;
+			Logger::writeToLog("Rendered ok!");
+		}
+		else
+		{
 			jassert(false);
 		}
-		AudioBuffer<float> renderbuffer{ numoutchans, blocksize };
-		MidiBuffer dummymidi;
-		double outlensecs = sc->getOutputDurationSecondsForRange(sc->getPlayRange(),sc->getFFTSize());
-		int64_t outlenframes = outlensecs * outsr;
-		int64_t outcounter{ 0 };
-		m_offline_render_state = 0;
-		m_offline_render_cancel_requested = false;
-		
-		while (outcounter < outlenframes)
-		{
-			if (m_offline_render_cancel_requested == true)
-				break;
-			processor->processBlock(renderbuffer, dummymidi);
-			int64 framesToWrite = std::min<int64>(blocksize, outlenframes - outcounter);
-			writer->writeFromAudioSampleBuffer(renderbuffer, 0, framesToWrite);
-			outcounter += blocksize;
-			m_offline_render_state = 100.0 / outlenframes * outcounter;
-		}
-		m_offline_render_state = 200;
-		Logger::writeToLog("Rendered ok!");
-		
 	};
 	std::thread th(rendertask);
 	th.detach();
