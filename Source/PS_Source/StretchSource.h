@@ -18,7 +18,7 @@ www.gnu.org/licenses
 
 #pragma once
 
-#include "../JuceLibraryCode/JuceHeader.h"
+#include <JuceHeader.h>
 #include "Input/AInputS.h"
 #include "ProcessedStretch.h"
 #include <mutex>

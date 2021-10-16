@@ -4,7 +4,8 @@
             "name": "Linux",
             "includePath": [
                 "${default}",
-                "./JUCE/modules"
+                "./JUCE/modules",
+                "./build/PaulStretchPlugin_artefacts/JuceLibraryCode"
             ],
             "compilerPath": "/usr/lib64/ccache/clang",
             "cStandard": "c17",

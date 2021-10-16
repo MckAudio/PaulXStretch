@@ -20,7 +20,7 @@
 
 #include <string>
 
-#include "../JuceLibraryCode/JuceHeader.h"
+#include <JuceHeader.h>
 
 #include "InputS.h"
 #include <mutex>

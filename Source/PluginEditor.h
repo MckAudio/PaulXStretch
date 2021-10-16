@@ -17,7 +17,7 @@ www.gnu.org/licenses
 
 #pragma once
 
-#include "../JuceLibraryCode/JuceHeader.h"
+#include <JuceHeader.h>
 #include "PluginProcessor.h"
 #include <memory>
 #include <vector>

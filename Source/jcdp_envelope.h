@@ -20,7 +20,7 @@ www.gnu.org/licenses
 #include <vector>
 #include <algorithm>
 #include <random>
-#include "../JuceLibraryCode/JuceHeader.h"
+#include <JuceHeader.h>
 #include "PS_Source/globals.h"
 
 struct envelope_point

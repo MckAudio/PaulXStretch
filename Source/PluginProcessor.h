@@ -17,7 +17,7 @@ www.gnu.org/licenses
 
 #pragma once
 
-#include "../JuceLibraryCode/JuceHeader.h"
+#include <JuceHeader.h>
 #include "PS_Source/PaulStretchControl.h"
 #include "jcdp_envelope.h"
 #include <array>

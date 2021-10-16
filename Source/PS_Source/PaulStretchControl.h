@@ -23,7 +23,7 @@ Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
 #include "ProcessedStretch.h"
 #include "BinauralBeats.h"
 #include "StretchSource.h"
-#include "../JuceLibraryCode/JuceHeader.h"
+#include <JuceHeader.h>
 #include "../ps3_BufferingAudioSource.h"
 
 class RenderInfo

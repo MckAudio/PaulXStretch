@@ -25,7 +25,7 @@
 #include "fftw3.h"
 
 
-#include "../JuceLibraryCode/JuceHeader.h"
+#include <JuceHeader.h>
 #include <random>
 #include <type_traits>
 

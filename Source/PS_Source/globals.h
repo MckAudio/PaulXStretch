@@ -20,7 +20,7 @@
 #include <vector>
 #include <memory>
 #include <set>
-#include "../JuceLibraryCode/JuceHeader.h"
+#include <JuceHeader.h>
 
 const String g_plugintitle{ "PaulXStretch 1.2.5" };
 

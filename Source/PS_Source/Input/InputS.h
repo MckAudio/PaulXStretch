@@ -20,7 +20,7 @@
 
 #include "../globals.h"
 
-#include "../JuceLibraryCode/JuceHeader.h"
+#include <JuceHeader.h>
 
 class InputS
 {
